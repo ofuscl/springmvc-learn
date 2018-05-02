@@ -1,0 +1,18 @@
+package test
+import java.util.List
+import demo.drools.Customer
+rule "rule1"
+    salience 1
+    when
+        $customer:Customer(age < 50);
+    then
+        System.out.println($customer.getName());
+    end
+
+rule "rule2"
+    salience 2
+    when
+        $customer:Customer(name matches "颜.*");
+    then
+        System.out.println($customer.getName());
+    end
