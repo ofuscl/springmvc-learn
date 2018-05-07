@@ -10,6 +10,10 @@ public class Student {
     private String sex;//性别
     private String age;//年龄
 
+    public Student(){
+
+    }
+
     public Student(Integer id,String name,String sex,String age){
         this.id=id;
         this.name=name;

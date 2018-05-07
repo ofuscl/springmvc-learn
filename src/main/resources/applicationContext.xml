@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:gupao="http://www.gupao.com/schema/gupao"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                http://www.gupao.com/schema/gupao http://www.gupao.com/schema/gupao.xsd">
+
+
+    <!--Schema spring-context.xsd不加版本是最新版本-->
+    <!--Schema配置 META-INF/spring-schemas : schema的绝对路径变schema相对路径-->
+    <!--namespace=http://www.springframework.org/schema/context-->
+    <!--别名=context-->
+    <!--绝对路径=http://www.springframework.org/schema/context/spring-context.xsd-->
+    <!--Handler配置 META-INF/spring-handlers : schema的绝对路径映射namespace;namespace映射到handlers-->
+    <!---->
+    <!-- 自动扫描与装配bean，扫描web包，将带有注解的类纳入spring容器管理 -->
+    <!-- <context:component-scan base-package="cn.itcast.oa">作用
+    Spring容器初始化时，会扫描cn.itcast.oa目录下标有@Component；@Service；@Controller；@Repository
+    注解的类纳入Spring容器管理
+    在类上，使用以下注解，实现bean的声明：
+      @Component：泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。
+      @Service 用于标注业务层组件
+      @Controller 用于标注控制层组件（如springMvc的controller，struts中的action）
+      @Repository用于标注数据访问组件，即DAO组件
+
+    在类的成员变量上，使用以下注解，实现属性的自动装配
+      @Autowired ：按类的类型进行装配
+      @Resource：
+  1.如果同时指定了name和type，那么从Spring上下文中找到唯一匹配的bean进行装配
+  2. 如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常
+  3.如果指定了type，则从上下文中找到类型匹配的唯一bean进行装配，找不到或者找到多个，都会抛出异常
+  4.如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配；
+     -->
+    <context:component-scan base-package="learn.word"></context:component-scan>
+
+    <!-- 加载外部的properties配置文件（引入jdbc的配置文件） 这种做法的好处是有自动检查机制-->
+    <context:property-placeholder location="classpath:properties/jdbc.properties"/>
+
+    <gupao:user  age="1" name="test" bean-name="user1"/>
+
+
+    <!--&lt;!&ndash; 配置数据库连接池（c3p0）这个可以在hibernate.cfg.xml中配置 &ndash;&gt;-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+
+        <!--&lt;!&ndash; 基本信息 ：jdbc的url、驱动名、数据库名字、密码&ndash;&gt;-->
+        <!--<property name="jdbcUrl" value="${jdbcUrl}"></property>-->
+        <!--<property name="driverClass" value="${driverClass}"></property>-->
+        <!--<property name="user" value="${username}"></property>-->
+        <!--<property name="password" value="${password}"></property>-->
+
+        <!--&lt;!&ndash; 其他配置 &ndash;&gt;-->
+        <!--&lt;!&ndash;初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 &ndash;&gt;-->
+        <!--<property name="initialPoolSize" value="3"></property>-->
+        <!--&lt;!&ndash;连接池中保留的最小连接数。Default: 3 &ndash;&gt;-->
+        <!--<property name="minPoolSize" value="3"></property>-->
+        <!--&lt;!&ndash;连接池中保留的最大连接数。Default: 15 &ndash;&gt;-->
+        <!--<property name="maxPoolSize" value="5"></property>-->
+        <!--&lt;!&ndash;当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 &ndash;&gt;-->
+        <!--<property name="acquireIncrement" value="3"></property>-->
+        <!--&lt;!&ndash; 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 &ndash;&gt;-->
+        <!--<property name="maxStatements" value="8"></property>-->
+        <!--&lt;!&ndash; maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 &ndash;&gt;-->
+        <!--<property name="maxStatementsPerConnection" value="5"></property>-->
+        <!--&lt;!&ndash;最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 &ndash;&gt;-->
+        <!--<property name="maxIdleTime" value="1800"></property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 配置SessionFactory-->
+    <!--（把数据源注入给session工厂）、配置映射文件将Spring与hibernate初步整合起来-->
+    <!--&ndash;&gt;-->
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+        <!--<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 配置声明式的事务管理（采用基于注解的方式）-->
+    <!--session工厂注入到事务管理器transactionManager使Spring与Hinbernate整合实现业务逻辑-->
+    <!--&ndash;&gt;-->
+
+    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"></property>-->
+    <!--</bean>-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+</beans>

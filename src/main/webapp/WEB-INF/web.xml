@@ -10,7 +10,7 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <!--resource时classpath*:与classpath:的区别；前者可以加载多jar中的相同文件，后者只加载第一个文件-->
-            <param-value>classpath*:properties/application</param-value>
+            <param-value>classpath*:/applicationContext.xml</param-value>
         </init-param>
         <!-- load-on-startup 说明如下： -->
         <!--是否在容器启动的时候加载这个servlet,实例化并调用init()-->

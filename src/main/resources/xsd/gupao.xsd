@@ -1,0 +1,26 @@
+<xsd:schema xmlns="http://www.springframework.org/schema/context"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:tool="http://www.springframework.org/schema/tool"
+            targetNamespace="http://www.gupao.com/schema/gupao"
+            elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:annotation>
+        <xsd:documentation>
+            <![CDATA[Defines the configuration elements for the Spring Framework's application context support.]]>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:element name="user">
+        <xsd:complexType>
+            <xsd:attribute name="bean-name"></xsd:attribute>
+            <xsd:attribute name="age" type="xsd:long">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <![CDATA[The location of the properties file to resolve placeholders against]]>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="name" type="xsd:string">
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
