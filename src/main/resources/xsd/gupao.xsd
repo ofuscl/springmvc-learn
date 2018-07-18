@@ -9,7 +9,7 @@
             <![CDATA[Defines the configuration elements for the Spring Framework's application context support.]]>
         </xsd:documentation>
     </xsd:annotation>
-    <xsd:element name="user">
+    <xsd:element name="usert">
         <xsd:complexType>
             <xsd:attribute name="bean-name"></xsd:attribute>
             <xsd:attribute name="age" type="xsd:long">

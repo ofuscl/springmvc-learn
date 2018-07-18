@@ -1,17 +1,19 @@
-package learn.pdf.wkhtmltopdf;
+package learn.file.image;
 
+import learn.file.image.HtmltoImg;
+import learn.file.pdf.wkhtmltopdf.HtmlToPdfInter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
 /**
- * Created by YScredit on 2018/4/26.
+ * Created by YScredit on 2018/5/19.
  */
-public class HtmltoPdf {
-    private static final Logger LOG = LoggerFactory.getLogger(HtmltoPdf.class);
+public class PhantomToImage {
+    private static final Logger LOG = LoggerFactory.getLogger(HtmltoImg.class);
 
-    private static final String TOPDFTOOL = "E:/wkhtmltopdf/bin/wkhtmltopdf";
+    private static final String TO_IMAGE_TOOL = "E:/wkhtmltopdf/bin/wkhtmltoimage";
 
     /**
      * html转pdf
@@ -28,10 +30,11 @@ public class HtmltoPdf {
             parent.mkdirs();
         }
 
+        // 网页截屏
         StringBuilder cmd = new StringBuilder();
-        cmd.append(TOPDFTOOL);
+        cmd.append("E:\\phantomjs_ccb\\phantomjs");
         cmd.append(" ");
-        cmd.append("--page-size A2");// 参数
+        cmd.append("E:\\phantomjs_ccb\\ccb_screenshot_test.js");
         cmd.append(" ");
         cmd.append(srcPath);
         cmd.append(" ");
@@ -56,9 +59,11 @@ public class HtmltoPdf {
     }
 
     public static void main(String[] args) {
-        String url = "https://www.aliyun.com/jiaocheng/240150.html?spm=5176.100033.9.11.02LbjR";
-        String path = "F:/baidu.pdf";
+//        String url = "file:///E:\\ccb-cloud\\craw_screenshot\\html\\q3ae3348d78be4f528786f036c3c80222\\20180615141302\\bzxr\\q3ae3348d78be4f528786f036c3c80222_bzxr_0.html";
+        String url = "file:///F://temp//xyzj.html";
+//        String url = "http://www.zjcredit.gov.cn/";
+        String path = "F://temp//1.png";
 
-        HtmltoPdf.convert(url,path);
+        convert(url,path);
     }
 }

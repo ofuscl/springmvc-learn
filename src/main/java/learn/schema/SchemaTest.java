@@ -2,6 +2,7 @@ package learn.schema;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class SchemaTest {
 
@@ -20,9 +21,16 @@ public class SchemaTest {
         // SAX:时间处理性能良好   --DOM ：属性结构，性能最差 XmlStream  Jaxb :
 //        PropertyEditor;
 //        ConversionService
-        ApplicationContext context= new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
-        User user = (User)context.getBean("user");
-        System.out.println(user.getAge()+":"+user.getName());
+        ApplicationContext classPathXml= new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml"});
+        User userClass = (User)classPathXml.getBean("userr");
+        System.out.println("class : " + userClass.getAge()+":"+userClass.getName());
 
+//        ApplicationContext fileSystemXml = new FileSystemXmlApplicationContext(new String[]{"applicationContext.xml"});
+//        User userFile = (User)fileSystemXml.getBean("user");
+//        System.out.println("file : " + userFile.getAge()+":"+userFile.getName());
+
+//        ApplicationContext xmlWeb = new XmlWebApplicationContext(new String[]{"applicationContext.xml"});
+//        User userXmlWeb = (User)xmlWeb.getBean("user");
+//        System.out.println("xml : " + userXmlWeb.getAge()+":"+userXmlWeb.getName());
     }
 }

@@ -1,4 +1,4 @@
-package learn.pdf.wkhtmltopdf;
+package learn.file.pdf;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +23,13 @@ public class HtmlToPdfInter extends Thread {
 
     public void run() {
         try {
-            InputStreamReader isr = new InputStreamReader(is, "utf-8");
+            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-            br.readLine();
-            System.out.println(br.readLine());
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line.toString()); //输出内容
+                LOG.info(line.toString());
+            }
         } catch (IOException e) {
             LOG.error(e.getMessage());
             e.printStackTrace();

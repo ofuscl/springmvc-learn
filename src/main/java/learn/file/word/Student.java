@@ -1,4 +1,4 @@
-package learn.word;
+package learn.file.word;
 
 /**
  * Created by YScredit on 2018/4/28.

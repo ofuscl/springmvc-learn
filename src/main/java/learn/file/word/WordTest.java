@@ -1,4 +1,4 @@
-package learn.word;
+package learn.file.word;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -8,12 +8,13 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * 生成word
+ * 说明：关键点是需要修改word另存为XML文件(*.xml)，然后修改.xml为.ftl即可
  * Created by YScredit on 2018/4/28.
  */
 public class WordTest {
 
-    private static final String filePath = "F://word/stu.doc";
-
+    private static final String filePath = "F://word/test.doc";
     private static final String templateFolder = WordTest.class.getResource("/").getPath() + "template/";
 
     private Configuration configuration = null;
@@ -70,9 +71,10 @@ public class WordTest {
         stuList.add(stu3);
         stuList.add(stu4);
         stuList.add(stu5);
-        dataMap.put("date", "2018-02-13");
-        dataMap.put("teacher", "Solin");
+//        dataMap.put("xxxx", "2018-02-13");
+        dataMap.put("xxxx", "Solin");
         dataMap.put("topic", "基于Java模板技术动态生成Word文档");
         dataMap.put("stuList", stuList);
+        dataMap.put("applyNo", "201213141242353");
     }
 }

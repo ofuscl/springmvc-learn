@@ -8,6 +8,6 @@ import org.springframework.context.config.*;
 public class GupaoNamespaceHandler extends NamespaceHandlerSupport{
     @Override
     public void init() {
-        this.registerBeanDefinitionParser("user", new UserBeanDefinitionParser());
+        this.registerBeanDefinitionParser("usert", new UserBeanDefinitionParser());
     }
 }

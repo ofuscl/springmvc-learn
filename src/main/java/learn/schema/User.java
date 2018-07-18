@@ -7,7 +7,10 @@ public class User {
 
     public User(){}
 
-
+    public User(long age,String name){
+        this.age=age;
+        this.name=name;
+    }
     public String getName() {
         return name;
     }

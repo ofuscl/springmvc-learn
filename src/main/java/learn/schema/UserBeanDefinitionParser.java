@@ -19,7 +19,7 @@ public class UserBeanDefinitionParser implements BeanDefinitionParser {
         builder.addPropertyValue("name",element.getAttribute("name"));
         BeanDefinitionRegistry beanDefinitionRegistry = parserContext.getRegistry();
         BeanDefinition beanDefinition = builder.getBeanDefinition();
-        beanDefinitionRegistry.registerBeanDefinition("user",beanDefinition);
+        beanDefinitionRegistry.registerBeanDefinition("userr",beanDefinition);
         return beanDefinition;
     }
 }
