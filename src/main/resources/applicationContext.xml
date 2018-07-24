@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:gupao="http://www.gupao.com/schema/gupao"
+       xmlns:gupao="http://www.gupao.com/schema/gupaoo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-                http://www.gupao.com/schema/gupao http://www.gupao.com/schema/gupao.xsd">
+                http://www.gupao.com/schema/gupaoo http://www.gupao.com/schema/gupao.xsd">
 
 
     <!--Schema spring-context.xsd不加版本是最新版本-->
@@ -38,7 +38,7 @@
     <!-- 加载外部的properties配置文件（引入jdbc的配置文件） 这种做法的好处是有自动检查机制-->
     <context:property-placeholder location="classpath:properties/jdbc.properties"/>
 
-    <gupao:usert  age="1" name="test" bean-name="user"/>
+    <gupao:usert  age="1" name="test" beanName="user"/>
 
 
     <!--&lt;!&ndash; 配置数据库连接池（c3p0）这个可以在hibernate.cfg.xml中配置 &ndash;&gt;-->

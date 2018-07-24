@@ -1,7 +1,6 @@
 package learn.file.image;
 
-import learn.file.image.HtmltoImg;
-import learn.file.pdf.wkhtmltopdf.HtmlToPdfInter;
+import learn.file.pdf.HtmlToPdfInter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -8,10 +8,10 @@ import java.util.Properties;
 /**
  * Created by YScredit on 2018/4/20.
  */
-public class ReflectMain {
+public class ReflectTest {
 
     public static void main(String[] args) {
-        ReflectMain reflect = new ReflectMain();
+        ReflectTest reflect = new ReflectTest();
         reflect.getClassName();
         reflect.getClassPath();
         reflect.testClassLoader1();

@@ -1,20 +1,20 @@
 package learn.reflect;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Created by YScredit on 2018/4/26.
  */
 class ReflectMainTest {
 
+
+    public static void main(String[] args) {
+
+        ReflectMainTest test = new ReflectMainTest();
+        test.testClassLoader1();
+    }
+
     /**
      * ClassLoader类装载器
      */
-    @Test
     public void testClassLoader1() {
         //1、获取一个系统的类加载器
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();

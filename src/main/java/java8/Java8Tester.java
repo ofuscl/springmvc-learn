@@ -1,5 +1,7 @@
 package java8;
 
+import org.junit.Test;
+
 import java.util.*;
 
 /**
@@ -7,27 +9,29 @@ import java.util.*;
  */
 public class Java8Tester {
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+//
+//        Java8Tester tester = new Java8Tester();
+////        tester.testOne();
+//
+//        List<String> lambdas = Arrays.asList("学习","仔细");
+//        lambdas.forEach(Lambda::test);
+//        lambdas.forEach(System.out::println);
+//        System.out.println(Lambda.test("xuexi"));
+//
+//    }
 
-        Java8Tester tester = new Java8Tester();
-//        tester.testOne();
+    @Test
+    public void testOne(){
 
-        List<String> lambdas = Arrays.asList("学习","仔细");
-        lambdas.forEach(Lambda::test);
-        lambdas.forEach(System.out::println);
-        System.out.println(Lambda.test("xuexi"));
-
-    }
-
-    private void testOne(){
-        List<String> names1 = new ArrayList<String>();
+        List<String> names1 = new ArrayList<>();
         names1.add("Google ");
         names1.add("Runoob ");
         names1.add("Taobao ");
         names1.add("Baidu ");
         names1.add("Sina ");
 
-        List<String> names2 = new ArrayList<String>();
+        List<String> names2 = new ArrayList<>();
         names2.add("Google ");
         names2.add("Runoob ");
         names2.add("Taobao ");
@@ -49,7 +53,7 @@ public class Java8Tester {
     }
 
     // 使用 java 7 排序
-    private void sortUsingJava7(List<String> names){
+    public void sortUsingJava7(List<String> names){
         Collections.sort(names, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
@@ -59,7 +63,7 @@ public class Java8Tester {
     }
 
     // 使用 java 8 排序
-    private void sortUsingJava8(List<String> names){
+    public void sortUsingJava8(List<String> names){
         Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
     }
 }

@@ -4,6 +4,7 @@ public class User {
 
     private long age;
     private String name;
+    private  String bname;
 
     public User(){}
 
@@ -25,5 +26,14 @@ public class User {
 
     public void setAge(long age) {
         this.age = age;
+    }
+
+
+    public String getBname() {
+        return bname;
+    }
+
+    public void setBname(String bname) {
+        this.bname = bname;
     }
 }

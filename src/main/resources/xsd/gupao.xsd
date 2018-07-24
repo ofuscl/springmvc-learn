@@ -2,7 +2,7 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:beans="http://www.springframework.org/schema/beans"
             xmlns:tool="http://www.springframework.org/schema/tool"
-            targetNamespace="http://www.gupao.com/schema/gupao"
+            targetNamespace="http://www.gupao.com/schema/gupaoo"
             elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xsd:annotation>
         <xsd:documentation>
@@ -11,7 +11,7 @@
     </xsd:annotation>
     <xsd:element name="usert">
         <xsd:complexType>
-            <xsd:attribute name="bean-name"></xsd:attribute>
+            <xsd:attribute name="beanName"></xsd:attribute>
             <xsd:attribute name="age" type="xsd:long">
                 <xsd:annotation>
                     <xsd:documentation>
