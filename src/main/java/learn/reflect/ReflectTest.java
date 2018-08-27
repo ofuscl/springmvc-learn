@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.Properties;
 
 /**
- * Created by YScredit on 2018/4/20.
+ * Created by yunfan on 2018/4/20.
  */
 public class ReflectTest {
 
@@ -57,6 +57,7 @@ public class ReflectTest {
         System.out.println(clazz.getConstructors());// [Ljava.lang.reflect.Constructor;@19d7047
         System.out.println(clazz.getDeclaredConstructors());// [Ljava.lang.reflect.Constructor;@19d7047
         System.out.println(clazz.getDeclaredFields()[0].getName());// xx
+
         try{
             ReflectDemo instance = (ReflectDemo)clazz.newInstance();
             Method method = clazz.getMethod("setXx",new Class[]{String.class});

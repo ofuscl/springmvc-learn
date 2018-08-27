@@ -26,6 +26,20 @@
         <jackson.version>1.9.12</jackson.version>
     </properties>
     <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.jxls/jxls-jexcel -->
+        <!--<dependency>-->
+            <!--<groupId>org.jxls</groupId>-->
+            <!--<artifactId>jxls-jexcel</artifactId>-->
+            <!--<version>1.0.7</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/net.sf.jxls/jxls-core -->
+        <dependency>
+            <groupId>net.sf.jxls</groupId>
+            <artifactId>jxls-core</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
         <!-- 使用yml让代码更美观-->
         <dependency>
             <groupId>org.yaml</groupId>

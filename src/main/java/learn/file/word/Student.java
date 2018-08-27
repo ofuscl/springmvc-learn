@@ -1,7 +1,7 @@
 package learn.file.word;
 
 /**
- * Created by YScredit on 2018/4/28.
+ * Created by yunfan on 2018/4/28.
  */
 public class Student {
 

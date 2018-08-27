@@ -540,8 +540,8 @@
         <pkg:xmlData>
             <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <dcterms:created xsi:type="dcterms:W3CDTF">2014-10-29T12:08:00Z</dcterms:created>
-                <dc:creator>YScredit</dc:creator>
-                <cp:lastModifiedBy>YScredit</cp:lastModifiedBy>
+                <dc:creator>yunfan</dc:creator>
+                <cp:lastModifiedBy>yunfan</cp:lastModifiedBy>
                 <dcterms:modified xsi:type="dcterms:W3CDTF">2018-04-28T10:27:55Z</dcterms:modified>
             </cp:coreProperties>
         </pkg:xmlData>

@@ -1,7 +1,7 @@
 package learn.reflect;
 
 /**
- * Created by YScredit on 2018/4/26.
+ * Created by yunfan on 2018/4/26.
  */
 class ReflectMainTest {
 

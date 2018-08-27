@@ -1,7 +1,7 @@
 package java8;
 
 /**
- * Created by YScredit on 2018/5/17.
+ * Created by yunfan on 2018/5/17.
  */
 public class Lambda {
 

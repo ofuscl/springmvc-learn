@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 /**
- * Created by YScredit on 2018/7/24.
+ * Created by yunfan on 2018/7/24.
  */
 public class YmlTest {
 

@@ -9,7 +9,7 @@ import java.net.URL;
 
 /**
  * 自动打开网页完成截图
- * Created by YScredit on 2018/5/19.
+ * Created by yunfan on 2018/5/19.
  */
 public class BrowseToImg {
 

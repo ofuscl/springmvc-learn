@@ -3,7 +3,7 @@ package demo.annotation;
 import java.lang.annotation.*;
 
 /**
- * Created by YScredit on 2018/4/20.
+ * Created by yunfan on 2018/4/20.
  */
 @Target(ElementType.TYPE)
 

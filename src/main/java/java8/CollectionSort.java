@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by YScredit on 2018/7/24.
+ * Created by yunfan on 2018/7/24.
  */
 public class CollectionSort {
 

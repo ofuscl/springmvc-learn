@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Created by YScredit on 2018/5/8.
+ * Created by yunfan on 2018/5/8.
  */
 public class FileReaderTest {
 

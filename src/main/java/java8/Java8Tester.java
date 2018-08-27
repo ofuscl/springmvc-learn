@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.*;
 
 /**
- * Created by YScredit on 2018/5/17.
+ * Created by yunfan on 2018/5/17.
  */
 public class Java8Tester {
 

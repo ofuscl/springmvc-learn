@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * 生成word
  * 说明：关键点是需要修改word另存为XML文件(*.xml)，然后修改.xml为.ftl即可
- * Created by YScredit on 2018/4/28.
+ * Created by yunfan on 2018/4/28.
  */
 public class WordTest {
 

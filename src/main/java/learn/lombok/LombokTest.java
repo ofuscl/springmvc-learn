@@ -3,7 +3,7 @@ package learn.lombok;
 import lombok.Data;
 
 /**
- * Created by YScredit on 2018/7/18.
+ * Created by yunfan on 2018/7/18.
  */
 @Data
 public class LombokTest {

@@ -1,7 +1,7 @@
 package demo.design;
 
 /**
- * Created by YScredit on 2018/4/23.
+ * Created by yunfan on 2018/4/23.
  */
 public class Banala {
 

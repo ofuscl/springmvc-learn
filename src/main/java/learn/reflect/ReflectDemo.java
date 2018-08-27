@@ -1,7 +1,7 @@
 package learn.reflect;
 
 /**
- * Created by YScredit on 2018/4/25.
+ * Created by yunfan on 2018/4/25.
  */
 public class ReflectDemo {
 
