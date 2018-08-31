@@ -37,10 +37,9 @@ public class DemoServlet extends HttpServlet {
 
     /**
      * @param config
-     * @throws ServletException
      */
     @Override
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) {
 
         // 读取配置文件
 //        doReadProperties();
@@ -74,12 +73,12 @@ public class DemoServlet extends HttpServlet {
             Class<?> cName = Class.forName(className.replace(".class", "").trim());
             if (cName.isAnnotationPresent(Controller.class)) {
                 Object instance = cName.newInstance();
-                Controller controller = (Controller) cName.getAnnotation(Controller.class);
+                Controller controller = cName.getAnnotation(Controller.class);
                 String key = controller.value();
                 instanceMap.put(key, instance);
             } else if (cName.isAnnotationPresent(Service.class)) {
                 Object instance = cName.newInstance();
-                Service service = (Service) cName.getAnnotation(Service.class);
+                Service service = cName.getAnnotation(Service.class);
                 String key = service.value();
                 instanceMap.put(key, instance);
             } else {
@@ -163,7 +162,7 @@ public class DemoServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         this.doGet(req, resp);
     }
 

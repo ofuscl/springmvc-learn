@@ -29,6 +29,7 @@ public class ExcelExportUtil {
         User user = new User("张三","2018-08-24","男");
         params.put("user", user);
 
+        System.out.println(templateFolder);
         // XLST模板转化
         XLSTransformer former = new XLSTransformer();
         former.transformXLS(templateFolder+"demo.xlsx", params, "F:/test/dest.xlsx");

@@ -13,7 +13,7 @@ import java.net.URL;
  */
 public class BrowseToImg {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
 
         try{
 

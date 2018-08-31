@@ -14,5 +14,11 @@ public class Test {
     public static void main(String[] args) {
 
 
+        int x = 1710;
+        int y = 0;
+
+        if(x < 300){
+
+        }
     }
 }

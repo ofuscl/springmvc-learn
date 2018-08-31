@@ -15,7 +15,7 @@ public class XmlReader {
     ApplicationContext context= new ClassPathXmlApplicationContext("applicationContext.xml");
     User user= (User)context.getBean("user");
     //读取多个文件
-    ClassPathXmlApplicationContext resource= new ClassPathXmlApplicationContext(new String[]{"applicationContextconfig.xml","applicationContext.xml","applicationContext-data.xml"});
+    ClassPathXmlApplicationContext resource= new ClassPathXmlApplicationContext("applicationContextconfig.xml","applicationContext.xml","applicationContext-data.xml");
     BeanFactory factory= resource;
 //    User user= (User)factory.getBean("user");
 

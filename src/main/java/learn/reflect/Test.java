@@ -25,7 +25,7 @@ public class Test {
         System.out.println(xx.type());
     }
 
-    private void xx(T investItem) throws Exception{
+    private void xx(T investItem) {
 
         Field[] fields = investItem.getClass().getDeclaredFields();
         for(Field field : fields){

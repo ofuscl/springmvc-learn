@@ -129,7 +129,7 @@ public class ExcelImportUtil {
             if (row == null) {
                 continue;
             }
-            T cls = (T)excelSheet.getClazz().newInstance();
+            T cls = excelSheet.getClazz().newInstance();
             Field[] fields = cls.getClass().getDeclaredFields();
             for (Field field : fields) {
                 int mod = field.getModifiers();

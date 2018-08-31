@@ -10,17 +10,11 @@ import java.util.List;
  */
 public class DesignService {
 
-    private static List<Apple> appleList = Arrays.asList(new Apple[]{
-        new Apple("red", "80"), new Apple("green", "100"), new Apple("yellow", "120")
-    });
-    private static List<Banala> banalaList = Arrays.asList(new Banala[]{
-            new Banala("yellow", "80","s"), new Banala("green", "100","b"), new Banala("yellow", "120","b")
-    });
+    private static List<Apple> appleList = Arrays.asList(new Apple("red", "80"), new Apple("green", "100"), new Apple("yellow", "120"));
+    private static List<Banala> banalaList = Arrays.asList(new Banala("yellow", "80","s"), new Banala("green", "100","b"), new Banala("yellow", "120","b"));
 
-    private static List<Fruit> fruitList = Arrays.asList(new Fruit[]{
-            new Fruit(new Banala("yellow", "80","s")), new Fruit(new Banala("green", "100","b")), new Fruit(new Banala("yellow", "120","b")),
-            new Fruit(new Apple("green", "100")),new Fruit(new Apple("yellow", "120"))
-    });
+    private static List<Fruit> fruitList = Arrays.asList(new Fruit(new Banala("yellow", "80","s")), new Fruit(new Banala("green", "100","b")), new Fruit(new Banala("yellow", "120","b")),
+            new Fruit(new Apple("green", "100")),new Fruit(new Apple("yellow", "120")));
 
     public static void main(String[] args) {
 //        Fruit<Apple> apple = new Fruit<>(new );

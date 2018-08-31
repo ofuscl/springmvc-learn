@@ -27,8 +27,8 @@ public class HtmlToPdfInter extends Thread {
             BufferedReader br = new BufferedReader(isr);
             String line = null;
             while ((line = br.readLine()) != null) {
-                System.out.println(line.toString()); //输出内容
-                LOG.info(line.toString());
+                System.out.println(line); //输出内容
+                LOG.info(line);
             }
         } catch (IOException e) {
             LOG.error(e.getMessage());

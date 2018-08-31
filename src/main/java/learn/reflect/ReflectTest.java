@@ -60,8 +60,8 @@ public class ReflectTest {
 
         try{
             ReflectDemo instance = (ReflectDemo)clazz.newInstance();
-            Method method = clazz.getMethod("setXx",new Class[]{String.class});
-            method.invoke(instance,new Object[]{"好好学习"});
+            Method method = clazz.getMethod("setXx", String.class);
+            method.invoke(instance, "好好学习");
             System.out.println(instance.getXx());// setXx
         }catch (Exception e){
             System.out.println(e);// setXx
