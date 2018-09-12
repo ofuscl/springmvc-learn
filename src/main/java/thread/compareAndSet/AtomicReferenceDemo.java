@@ -1,4 +1,4 @@
-package java8.compareAndSet;
+package thread.compareAndSet;
 
 import java.util.concurrent.atomic.AtomicReference;
 

@@ -1,4 +1,4 @@
-package java8.Future;
+package thread.Future;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;

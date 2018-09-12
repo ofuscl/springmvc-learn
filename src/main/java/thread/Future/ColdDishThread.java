@@ -1,4 +1,4 @@
-package java8.Future;
+package thread.Future;
 
 public class ColdDishThread extends Thread{
 

@@ -1,4 +1,4 @@
-package java8.compareAndSet;
+package thread.compareAndSet;
 
 public class Person {
 
