@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
+ * 删除符合条件的数据
  * Created by yunfan on 2018/7/16.
  */
-public class RemoveIf {
+public class RemoveIfTest {
 
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
