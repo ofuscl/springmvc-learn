@@ -1,1 +1,2 @@
 http\://www.gupao.com/schema/gupaoo=learn.schema.GupaoNamespaceHandler
+http\://www.springframework.org/schema/aop=org.springframework.aop.config.AopNamespaceHandler
