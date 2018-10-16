@@ -1,4 +1,4 @@
-package demo.util.comm;
+package util;
 
 
 /**
@@ -35,6 +35,9 @@ public class RegularUtil {
     public static final String REG_CREDIT_CODE = "9[1|2|3]([A-Za-z0-9]{16})";
     /** 统一社会信用代码 */
     public static final String CREDIT_CODE = "9[1|2|3]([A-Za-z0-9]{16})";
+    /** 个体统一社会信用代码 */
+    public static final String GT_CREDIT_CODE = "92([A-Za-z0-9]{16})";
+
     /** 有数ID */
     public static final String ENT_ID = "[q|g]([A-Za-z0-9_]{31,32})";
     /** 医院ID */
@@ -68,7 +71,9 @@ public class RegularUtil {
     /** 整数 */
     public final static String IS_INTEGER = "[+-]?\\d+";
     /** double值 */
-    public final static String IS_DOUBLE = "[+-]?\\d+(\\.\\d+)?";
+//    ((-?\\d+.?\\d*)[Ee]{1}(-?\\d+)) 科学计数法
+//    [+-]?\\d+(\\.\\d+)? 普通duble
+    public final static String IS_DOUBLE = "([+-]?\\d+(\\.\\d+)?)|((-?\\d+.?\\d*)[Ee]{1}(-?\\d+))";
     /** 各种圆点正则表达式 */
     public static final String SPOTS = "((&#8226;)|(\u2022)|·|⋅|∙|・|•|●)";
     /** 全角字符 */

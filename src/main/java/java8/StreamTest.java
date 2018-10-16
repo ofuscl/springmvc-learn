@@ -21,6 +21,8 @@ public class StreamTest {
         allMap.get("a").add(new User("xiaogang","男",3));
         allMap.get("a").add(new User("xiaohua","女",3));
 
+        System.out.println("ddd "+ allMap.get("a").stream().filter(o -> o.getSex().equals("x")).collect(Collectors.toList()));
+
         // 设置空值场合的默认值
         System.out.println(Optional.ofNullable(allMap.get("b")).orElse(new ArrayList<>()));
 

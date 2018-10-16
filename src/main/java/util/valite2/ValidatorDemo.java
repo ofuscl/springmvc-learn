@@ -1,7 +1,7 @@
 package util.valite2;
 
-import demo.util.comm.StringUtil;
 import org.apache.commons.lang.StringUtils;
+import util.StringUtil;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

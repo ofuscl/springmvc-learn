@@ -1,6 +1,6 @@
 package util.valite;
 
-import demo.util.comm.StringUtil;
+import util.StringUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;

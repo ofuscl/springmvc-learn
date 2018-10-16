@@ -17,6 +17,8 @@ public class FileReaderTest {
         fromFile.delete();
 //        copyFile(toFile,fromFile);
 
+        new FileReaderTest().testFileReaderWriterNew();
+
     }
 
     private void testFileReaderWriter(){
@@ -54,6 +56,29 @@ public class FileReaderTest {
                     System.out.println(e);
                 }
             }
+        }
+    }
+
+
+    /**
+     * try with resources 处理文件流关闭操作
+     */
+    private void testFileReaderWriterNew(){
+
+        try (FileReader fr = new FileReader("F:/tmp/ktgg1.txt"); FileWriter fw = new FileWriter("F:/tmp/fileWriter.txt")){
+            int ch = 0;
+            char []  buf = new char[1024];
+            while ((ch=fr.read(buf)) != -1){
+                System.out.println(buf.length);
+                fw.write(new String(buf,1,ch));
+            }
+
+            for(char bu : buf){
+                System.out.println(bu);
+            }
+
+        }catch (IOException e){
+            System.out.println(e);
         }
     }
 

@@ -1,7 +1,6 @@
 package thread.Future;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 /**
  * 多线程结束处理。
@@ -16,10 +15,12 @@ public class FutureDemo {
     public static void main(String[] args) {
 
         try {
-            oldDone();//旧的处理方法
+//            oldDone();//旧的处理方法
             System.out.println("------------------------------------------------------------");
             futureDone();//新的处理方法
-
+//            System.out.println("------------------------------------------------------------");
+//            threadPool();
+            threadPool();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,35 +30,31 @@ public class FutureDemo {
         long start = System.currentTimeMillis();
 
         // 等凉菜
-        Callable ca1 = new Callable(){
-
-            @Override
-            public String call() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return "凉菜准备完毕";
+        FutureTask<String> ft1 = new FutureTask<String>(() ->{
+            System.out.println("准备q");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        };
-        FutureTask<String> ft1 = new FutureTask<String>(ca1);
+            return "凉菜准备完毕";
+        });
         new Thread(ft1).start();
 
         // 等包子 -- 必须要等待返回的结果，所以要调用join方法
-        Callable ca2 = new Callable(){
-
-            @Override
-            public Object call() {
-                try {
-                    Thread.sleep(1000*3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return "包子准备完毕";
+        FutureTask<String> ft2 = new FutureTask<String>(() -> {
+            System.out.println("准备v");
+            String x = null;
+            if (x.equals("1")){
+                return  "xx";
             }
-        };
-        FutureTask<String> ft2 = new FutureTask<String>(ca2);
+            try {
+                Thread.sleep(1000*3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "包子准备完毕";
+        });
         new Thread(ft2).start();
 
         System.out.println(ft1.get()); // get方法可以当任务结束后返回一个结果，如果调用时，工作还没有结束，则会阻塞线程，直到任务执行完毕
@@ -83,5 +80,21 @@ public class FutureDemo {
 
         long end = System.currentTimeMillis();
         System.out.println("准备完毕时间："+(end-start));
+    }
+
+    private static void threadPool(){
+        long start = System.currentTimeMillis();
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(5, 5, 500L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+        poolExecutor.execute(new ColdDishThread());
+        poolExecutor.execute(new BumThread());
+
+        // 判断线程完结
+        while (true) {
+            if(poolExecutor.isTerminated() || poolExecutor.getActiveCount() ==0){
+                long end = System.currentTimeMillis();
+                System.out.println("准备完毕时间："+(end-start));
+                break;
+            }
+        }
     }
 }

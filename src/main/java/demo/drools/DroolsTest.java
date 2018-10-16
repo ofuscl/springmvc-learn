@@ -25,7 +25,7 @@ public class DroolsTest {
 
     public static void main(String[] args) {
         DroolsTest test = new DroolsTest();
-        test.test4();
+        test.test1();
     }
 
     private void test1(){

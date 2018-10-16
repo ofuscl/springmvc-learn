@@ -1,6 +1,6 @@
-package demo.util.comm;
+package util;
 
-import org.apache.commons.lang.StringUtils;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -8,36 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * 目录：
- * 1、isEmpty(str);  字符串是否为空（含：null、""、"    "、"\t"、"\n"、"null"）
- * 2、isNotEmpty(str);   字符串不为空?（含：null、""、"    "、"\t"、"\n"、"null"）
- * 3、toString(Object);  Object -> String （null 返回 null，结果trim()）
- * 4、toStringNotNull(Object);   Object -> String （若isEmpty则返回 ""，结果未trim()）
- * 6、toIntegerFromObj(Object);   Object -> Integer （若isEmpty则返回 0，否则Integer.parseInt()）
- * 7、toDoubleFromObj(Object);   Object -> Double （若isEmpty则返回 0，否则Integer.parseInt()）
- * 8、toDoubleStrFromObj(Object);   Object -> String （toStrFromDouble(toDoubleFromObj())，Object转换为Double类型字符串）
- * 9、toStrFromDouble(Double);   Double -> String （null、0 返回 ""，否则String.format()）
- * 10、isNumeric(String);   判断字符串是否为纯数字(若isEmpty、有小数点、以正负号开头 false，否则true)
- * 11、removeBlank(String);   去掉字符串中的所有空格（\\s*|\t|\r|\n）
- * 12、removeUndefined(String);   去掉字符串中的undefined和undefined|
- * 13、convertToChineseKuohao(String);   转换字符串中的括号为中文括号
- * 15、replaceSpeSymbol(String);   特殊字符替换
- * 16、isChinese(String);   判断是否为中文字符串
- * 17、isChinese(char);   判断是否为中文字符
- * 18、isConSpeCharacters(String);   判断是否包含特殊字符，如：“”￥！？等
- * 19、convert(String);   特殊字符转换：ö->&ouml;、ü->&uuml;
- * 20、convertUnicode(String);   特殊字符转换：&ouml;->ö、&uuml->ü;
- * 21、replaceSpots(String);   将各种类型的圆点替换成中文圆点
- * 21、getNames(String);   将包含括号的返回既有中文括号，也有英文括号的SQL条件字符串：A(a)B——>'A(a)B,A（a）B'
- * 22、toSqlStrFromList(String);   将字符串集合转换成SQL IN 中字符串，结果：'a','b','c'
- *
- * Deprecated：
- * 5、toInteger(Object);   Object >> Integer （null和""返回0，Integer.parseInt()）
- * 14、replace(String);   特殊字符替换
- */
-public class StringUtil extends StringUtils {
-
+public class StringUtil {
 
     public static final String EMPTY = "";
 
@@ -83,17 +54,6 @@ public class StringUtil extends StringUtils {
         }
         String s = obj.toString();
         return isEmpty(s) ? EMPTY : s;
-    }
-
-    /**
-     * 转化-字符串为Integer。（不含null）
-     * <br>
-     * 建议使用toIntegerFromObj(obj)
-     *
-     */
-    @Deprecated
-    public static Integer toInteger(Object obj) {
-        return obj == null || obj == EMPTY ? 0 : Integer.parseInt(obj.toString());
     }
 
     /**
@@ -261,10 +221,13 @@ public class StringUtil extends StringUtils {
      */
     private static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-        return ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B
                 || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
-                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION;
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -280,26 +243,26 @@ public class StringUtil extends StringUtils {
         return m.find();
     }
 
-	/**
-	 * 比对字符串处理。
-	 * 去除特殊字符
-	 *
-	 */
-	public static String getRegExStr(String str) {
-		if (StringUtil.isEmpty(str)) {
-			return "";
-		}
-		// 去除特殊字符
-		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?！￥……（）—\\-［］【】‘；：”“’。，、？　 \\\\～·＠％＾｛＋＼／｜＂＇＜＞－《》＃＿．＊_]";
-		Pattern p = Pattern.compile(regEx);
-		Matcher m = p.matcher(str);
-		return m.replaceAll("").trim();
-	}
+    /**
+     * 比对字符串处理。
+     * 去除特殊字符
+     *
+     */
+    public static String getRegExStr(String str) {
+        if (StringUtil.isEmpty(str)) {
+            return "";
+        }
+        // 去除特殊字符
+        String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?！￥……（）—\\-［］【】‘；：”“’。，、？　 \\\\～·＠％＾｛＋＼／｜＂＇＜＞－《》＃＿．＊_]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.replaceAll("").trim();
+    }
 
-	/**
-	 * 特殊字符转换器。
-	 */
-	public static String convert(String str){
+    /**
+     * 特殊字符转换器。
+     */
+    public static String convert(String str){
 
         if (isEmpty(str)) {
             return str;
@@ -479,14 +442,69 @@ public class StringUtil extends StringUtils {
         return new String(cha);
     }
 
+    /**
+     * 除法运算(默认保留位数)
+     * @param divisor
+     * @param dividend
+     * @return
+     */
+    public static String divition(double divisor,double dividend){
+        return divition(divisor, dividend, 2);
+    }
+
+    /**
+     * 除法运算运算
+     * @param divisor
+     * @param dividend
+     * @param num
+     * @return
+     */
+    public static String divition(double divisor,double dividend,int num){
+        if (dividend == 0) {
+            return "";
+        }
+        return String.format("%."+num+"f",divisor / dividend);
+    }
+
     public static void main(String[] args) {
         List<String> xxList = new ArrayList<>();
         xxList.add("1");
         xxList.add(null);
         xxList.add("");
-        System.out.print(fullToHalf("ＴＣＬ"));
+        System.out.println(fullToHalf("ＴＣＬ"));
 
-
+        double r = 5 / Double.parseDouble("0.0");
+        System.out.println(r);
+        System.out.println(divition(1.2,1.1,2));
     }
 
+    /**
+     * 首字母小写
+     * @param str
+     * @return
+     */
+    public static String lowerFirstCase(String str){
+
+        char[] chars = str.toCharArray();
+        if(Character.isUpperCase(chars[0])){
+            chars[0] += 32;
+        }
+
+        return String.valueOf(chars);
+    }
+
+    /**
+     * 首字母大写
+     * @param str
+     * @return
+     */
+    public static String upperFirstCase(String str){
+
+        char[] chars = str.toCharArray();
+        if(Character.isLowerCase(chars[0])){
+            chars[0] -= 32;
+        }
+
+        return String.valueOf(chars);
+    }
 }

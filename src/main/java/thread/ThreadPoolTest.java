@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadPoolTest {
 
-    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(150, 150, 500L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+    private ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(5, 5, 500L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
     public static void main(String[] args) {
 
@@ -45,6 +45,12 @@ public class ThreadPoolTest {
             });
 
             test.poolExecutor.execute(thread);
+
+            // 判断线程完结
+            if(test.poolExecutor.isTerminated() || test.poolExecutor.getActiveCount() ==0){
+
+            }
+
         }
     }
 }
