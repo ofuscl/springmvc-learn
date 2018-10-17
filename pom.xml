@@ -206,6 +206,11 @@
             <version>4.3.15.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.33</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -225,25 +230,25 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
-            <plugin>
-                <!-- jar冲突检测工具，install时执行 -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M2</version>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <DependencyConvergence />
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--&lt;!&ndash; jar冲突检测工具，install时执行 &ndash;&gt;-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-enforcer-plugin</artifactId>-->
+                <!--<version>3.0.0-M2</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>enforce</id>-->
+                        <!--<configuration>-->
+                            <!--<rules>-->
+                                <!--<DependencyConvergence />-->
+                            <!--</rules>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>enforce</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

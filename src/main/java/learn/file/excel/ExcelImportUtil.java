@@ -59,13 +59,13 @@ public class ExcelImportUtil {
                     return;
                 }
 
-                System.out.println(sheetEntry.getKey() + "  before -----------------");
+                System.out.println(sheetEntry.getKey() + "  读取内容直接输出 -----------------");
                 String[][] fieldArray2 = (String[][])sheetEntry.getValue();
                 for (int r = 0; r < fieldArray2.length; r++){
                     System.out.println(JsonUtil.toJsonFromObject(fieldArray2[r]));
                 }
 
-                System.out.println(sheetEntry.getKey() + "  after ---------------------");
+                System.out.println(sheetEntry.getKey() + "  行列转换后输出---------------------");
 
                 String[][] fieldArray = (String[][])sheetEntry.getValue();
                 String[][] xx = new String[fieldArray[0].length][fieldArray.length];
