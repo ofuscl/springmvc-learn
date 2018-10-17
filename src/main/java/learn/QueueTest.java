@@ -7,6 +7,9 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
+/**
+ * 队列
+ */
 public class QueueTest {
 
     public static void main(String[] args) {

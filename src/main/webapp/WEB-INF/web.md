@@ -11,10 +11,10 @@
 10      <context-param></context-param>
 11 
 12      <!--过滤器元素将一个名字与一个实现javax.servlet.Filter接口的类相关联-->
-13      <filter></filter>
+13      <biz.filter></biz.filter>
 14 
 15      <!--一旦命名了一个过滤器，就要利用filter-mapping元素把它与一个或多个servlet或JSP页面相关联-->
-16      <filter-mapping></filter-mapping>
+16      <biz.filter-mapping></biz.filter-mapping>
 17 
 18      <!--servlet API的版本2.3增加了对事件监听程序的支持，事件监听程序在建立、修改和删除会话或servlet环境时得到通知。
 19          Listener元素指出事件监听程序类-->
@@ -104,18 +104,18 @@
 
 5.过滤器配置：将一个名字与一个实现javaxs.servlet.Filter接口的类相关联
 
- 1 <filter>
- 2      <filter-name>setCharacterEncoding</filter-name>
- 3      <filter-class>com.myTest.setCharacterEncodingFilter</filter-class>
+ 1 <biz.filter>
+ 2      <biz.filter-name>setCharacterEncoding</biz.filter-name>
+ 3      <biz.filter-class>com.myTest.setCharacterEncodingFilter</biz.filter-class>
  4      <init-param>
  5          <param-name>encoding</param-name>
  6          <param-value>GB2312</param-value>
  7      </init-param>
- 8  </filter>
- 9  <filter-mapping>
-10      <filter-name>setCharacterEncoding</filter-name>
+ 8  </biz.filter>
+ 9  <biz.filter-mapping>
+10      <biz.filter-name>setCharacterEncoding</biz.filter-name>
 11      <url-pattern>/*</url-pattern>
-12  </filter-mapping>
+12  </biz.filter-mapping>
  
 
 6.监听器配置
