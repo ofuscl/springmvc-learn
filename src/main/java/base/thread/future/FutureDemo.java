@@ -1,4 +1,4 @@
-package base.thread.Future;
+package base.thread.future;
 
 import java.util.concurrent.*;
 

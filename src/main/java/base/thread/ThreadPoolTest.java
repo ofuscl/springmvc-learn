@@ -51,6 +51,11 @@ public class ThreadPoolTest {
 
             }
 
+            // 判断线程池队列大小
+            if(test.poolExecutor.getQueue().size() < 10){
+
+            }
+
         }
     }
 }

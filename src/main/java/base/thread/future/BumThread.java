@@ -1,4 +1,4 @@
-package base.thread.Future;
+package base.thread.future;
 
 public class BumThread  extends Thread{
 
