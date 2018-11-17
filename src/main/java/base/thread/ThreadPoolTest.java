@@ -48,12 +48,12 @@ public class ThreadPoolTest {
 
             // 判断线程完结
             if(test.poolExecutor.isTerminated() || test.poolExecutor.getActiveCount() ==0){
-
+                break;
             }
 
             // 判断线程池队列大小
             if(test.poolExecutor.getQueue().size() < 10){
-
+                break;
             }
 
         }

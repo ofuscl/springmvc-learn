@@ -21,7 +21,16 @@ public class Test {
     private static final Logger logger = LoggerFactory.getLogger(Test.class);
 
     public static void main(String[] args) throws Exception{
-        System.out.println("com/page+".replaceAll("\\+",""));
-        System.out.println("com.scl".replaceAll("\\.",Matcher.quoteReplacement(File.separator)));
+
+        System.out.println(test(9));
+    }
+
+    private static int test(int k){
+        int i =0;
+        if (k == 10){
+            final int x = i;
+            return x;
+        }
+        return k;
     }
 }

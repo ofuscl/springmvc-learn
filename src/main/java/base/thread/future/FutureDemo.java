@@ -3,6 +3,7 @@ package base.thread.future;
 import java.util.concurrent.*;
 
 /**
+ * 闭锁
  * 多线程结束处理。
  *  @url https://blog.csdn.net/u014209205/article/details/80598209
  *  需求场景：等早餐过程中，包子需要3秒，凉菜需要1秒，
@@ -44,7 +45,7 @@ public class FutureDemo {
         // 等包子 -- 必须要等待返回的结果，所以要调用join方法
         FutureTask<String> ft2 = new FutureTask<String>(() -> {
             System.out.println("准备v");
-            String x = null;
+            String x = "1";
             if (x.equals("1")){
                 return  "xx";
             }
@@ -55,7 +56,7 @@ public class FutureDemo {
             }
             return "包子准备完毕";
         });
-        new Thread(ft2).start();
+//        new Thread(ft2).start();
 
         System.out.println(ft1.get()); // get方法可以当任务结束后返回一个结果，如果调用时，工作还没有结束，则会阻塞线程，直到任务执行完毕
         System.out.println(ft2.get());
