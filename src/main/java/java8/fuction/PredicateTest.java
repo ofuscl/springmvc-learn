@@ -1,5 +1,7 @@
 package java8.fuction;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -14,6 +16,8 @@ public class PredicateTest {
         test1();
         System.out.println("----------------------------------");
         test2();
+        System.out.println("----------------------------------");
+        test3();
     }
 
     private static void test1(){
@@ -41,14 +45,30 @@ public class PredicateTest {
 
         //AND logical operation
         Predicate<String> predicateAnd=predicate.and(s->s.length()>4);
-        System.out.println(predicateAnd.test("Hello"));
+        System.out.println("1 : " + predicateAnd.test("Hello"));
 
         //OR logical operation
         Predicate<String> predicateOr=predicate.or(s->s.length()==10);
-        System.out.println(predicateOr.test("Hello"));
+        System.out.println("2 : " + predicateOr.test("Hello"));
 
         //非 即相反的意思
         Predicate<String> predicateNegate=predicate.negate();
-        System.out.println(predicateNegate.test("Hello"));
+        System.out.println("3 : " + predicateNegate.test("Hello"));
+    }
+
+
+    private static void test3(){
+        List<String> list1 = new ArrayList<>();
+        list1.add("a");
+        list1.add("b");
+        list1.add("c");
+
+        List<String> list2 = new ArrayList<>();
+        list2.add("a");
+        list2.add("b");
+
+        Predicate<String> p = (eid) -> list2.contains(eid);
+        list1.removeIf(p);
+        list1.forEach(System.out::println);
     }
 }

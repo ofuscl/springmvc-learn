@@ -1,8 +1,17 @@
 package util;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *  正则校验-工具类
+ *  转义字符： \
+ *  位置字符： ^ $
+ *  计量字符： * = {0,1} ; + = {1,} ; ? = {0,1} ; {n},{n,}{n,m}
+ *             计量字符后再加?，为贪婪字符 例如 'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'
+ *  匹配字符： .  说明：匹配除换行符（\n、\r）之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用像"(.|\n)"的模式
+ *  范围字符： [xyz] --包含其中任意一个 ；[^xyz] --不包含其中任意一个
  */
 public class RegularUtil {
 
@@ -94,7 +103,54 @@ public class RegularUtil {
     }
 
     public static void main(String[] args) {
-        System.err.println("a>" + StringUtil.fullToHalf("中文ａａ"));
+        validateOne("plain","[abc]");
+        validateTwo("plain","[abc]");
+        validateThree("plain","[abc]");
+        validateFour("plain","[abc]");
+    }
 
+    /**
+     * 完全匹配  validateOne 是 validateTwo 的简写
+     */
+    private static boolean validateOne(String content, String pattern){
+        boolean isMatch = content.matches(pattern);
+        System.out.println(isMatch);
+        return isMatch;
+    }
+
+    /**
+     * 完全匹配  validateTwo 是 validateThree 的简写
+     */
+    private static boolean validateTwo(String content, String pattern){
+        boolean isMatch = Pattern.matches(pattern, content);
+        System.out.println(isMatch);
+        return isMatch;
+    }
+
+    /**
+     * 完全匹配
+     */
+    private static boolean validateThree(String content, String pattern){
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(content);
+        System.out.println(m.matches());
+        return m.matches();
+    }
+
+    /**
+     * 非完全匹配，Matcher结果处理方式很多，更加灵活 ，是上面四种方法的汇总
+     */
+    private static boolean validateFour(String content, String pattern){
+
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(content);
+        if (m.find()) {
+            System.out.println("MATCH");
+        } else {
+            System.out.println("NO MATCH");
+        }
+
+        System.out.println(m.end());
+        return m.find();
     }
 }
