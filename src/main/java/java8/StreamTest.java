@@ -27,15 +27,18 @@ public class StreamTest {
         allMap.put("a",new ArrayList<>());
         allMap.get("a").add(new User("xiaoming","男",7));
         allMap.get("a").add(new User("xiaogang","男",5));
+        allMap.get("a").add(new User("xiaogang","男",2));
         allMap.get("a").add(new User("xiaohua","女",2));
 
         List<User> userList = allMap.get("a");
 
-        testFilter(userList);
+        List<String> list = new ArrayList<>();
+        System.out.println(list.stream().collect(Collectors.joining("','", "'", "'")).equals("''"));
+//        testFilter(userList);
 //        testFlapMap(userList);
 //        testStream(userList);
 //        testGroupBy(userList);
-//        testSorted(userList);
+        testSorted(userList);
 //        testMaxMin(userList);
 //        testSum(userList);
 //        testList(userList);
@@ -137,6 +140,8 @@ public class StreamTest {
         System.out.println("testJoin 222 :" + str2);
         String str3 = userList.stream().map(u -> u.getName()).collect(Collectors.joining(","));
         System.out.println("testJoin 333 :" + str3);
+        String str4 = userList.stream().map(u -> u.getName()).collect(Collectors.joining("','", "'", "'"));
+        System.out.println("testJoin 444 :" + str4);
 
 //        userList.stream().max()
     }
@@ -189,6 +194,12 @@ public class StreamTest {
         userList.sort(Comparator.comparing(User::getAge).reversed());
         userList.forEach(u -> {
             System.out.println("直接条件排序-DESC: " + u.getName());
+        });
+
+        // stream -联合排序 ，多条件
+        userList.sort(Comparator.comparing(User::getName).thenComparing(User::getAge));
+        userList.forEach(u -> {
+            System.out.println("联合排序-: " + u.getName() +" | "+ u.getAge());
         });
     }
 

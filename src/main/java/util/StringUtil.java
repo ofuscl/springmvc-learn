@@ -507,4 +507,13 @@ public class StringUtil {
 
         return String.valueOf(chars);
     }
+
+    public static String toMoney(String str){
+
+        // 该方法将.和数字之外的都置空；存在以下问题
+        // 1、.有多个的情况，或者位置不对；2、如何知道单位比如单位是美元和万元等等
+        String money = str.replaceAll("[^\\d.]","");
+
+        return money;
+    }
 }

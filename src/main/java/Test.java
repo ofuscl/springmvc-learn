@@ -17,20 +17,26 @@ import java.util.regex.Matcher;
  */
 public class Test {
 
-    /** logger */
-    private static final Logger logger = LoggerFactory.getLogger(Test.class);
+    public static void main(String[] args){
 
-    public static void main(String[] args) throws Exception{
+        Map<String, Integer> myMap = new HashMap<>();
+        String keyA = "A";
+        String keyB = "B";
+        String keyC = "C";
+        String keyD = "D";
+        String keyE = "E";
+        String keyF = "F";
+        String keyG = "G";
+        String keyH = "H";
+        myMap.put(keyA, 5);
+//        myMap.put(keyB, "str01B");
+//        myMap.put(keyC, "str01C");
 
-        System.out.println(test(9));
-    }
+//        myMap.compute(keyA,(k,v) -> (v == null)? 1:(v + 1));
 
-    private static int test(int k){
-        int i =0;
-        if (k == 10){
-            final int x = i;
-            return x;
-        }
-        return k;
+        String transaction = "10000万元";
+        String  t = transaction.replaceAll("[^\\d.]","");
+        System.out.println(Double.parseDouble(t));
+        System.out.println(transaction);
     }
 }
