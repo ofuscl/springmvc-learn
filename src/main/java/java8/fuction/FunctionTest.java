@@ -1,6 +1,8 @@
 package java8.fuction;
 
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Function是一个功能接口，其功能方法(单个抽象方法)是R apply(T t)。 Function接口表示采用单个参数T并返回结果R的操作
@@ -14,6 +16,8 @@ public class FunctionTest {
         System.out.println("----------------------------------");
         test2();
     }
+
+
 
     private static void test1(){
         Function<Integer,String> function = (t) -> {

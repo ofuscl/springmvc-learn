@@ -1,8 +1,10 @@
 package java8;
 
 import org.junit.Test;
+import util.JsonUtil;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -34,7 +36,9 @@ public class StreamTest {
 
         List<String> list = new ArrayList<>();
         System.out.println(list.stream().collect(Collectors.joining("','", "'", "'")).equals("''"));
-//        testFilter(userList);
+//        transformToObjects1(userList);
+//        transformToObjects2(userList);
+        //        testFilter(userList);
 //        testFlapMap(userList);
 //        testStream(userList);
 //        testGroupBy(userList);
@@ -44,6 +48,46 @@ public class StreamTest {
 //        testList(userList);
 //        testMap(userList);
 //        testJoin(userList);
+    }
+
+    private static void transformToObjects1(List<User> users) {
+
+        Function<User, Object[]> f = new Function<User, Object[]>() {
+            @Override
+            public Object[] apply(User q) {
+                return new Object[]{q.getName(), q.getSex()};
+            }
+        };
+
+        List<Object[]> list = users.stream().map(f).collect(Collectors.toList());
+        System.out.println("transfor1 :" + JsonUtil.toJsonFromObject(list));
+    }
+
+    private static void transformToObjects2(List<User> users) {
+
+        List<Map<String,Object>> list = new ArrayList<>();
+        Map<String,Object> m = new HashMap<>();
+        m.put("a","1");
+        m.put("b","2");
+        m.put("c","3");
+        list.add(m);
+
+        Map<String,Object> m2 = new HashMap<>();
+        m2.put("a","11");
+        m2.put("b","21");
+        m2.put("c","31");
+        list.add(m2);
+        Function<Map, Map<String,String>> f = new Function<Map, Map<String,String>>() {
+            @Override
+            public Map<String,String> apply(Map m) {
+                Map<String,String> mx = new HashMap<>();
+                mx.put(m.get("a").toString(),m.get("c").toString());
+                return mx;
+            }
+        };
+
+        List<Map<String,String>> list2 = list.stream().map(f).collect(Collectors.toList());
+        System.out.println("transfor2 :" + JsonUtil.toJsonFromObject(list2));
     }
 
     /**
@@ -177,7 +221,7 @@ public class StreamTest {
     public static void testSorted(List<User> userList){
         System.out.println("testSorted  start----------------------");
 
-        // stream - 正序排列 -条件
+        // stream - 自然顺序 -条件
         userList.stream().sorted(Comparator.comparing(User::getAge)).forEach(u ->{
             System.out.println("stream条件排序-ASC: " + u.getName());
         });

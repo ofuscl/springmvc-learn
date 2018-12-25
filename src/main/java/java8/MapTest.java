@@ -33,11 +33,11 @@ public class MapTest {
         // 如果key不存在,则添加key,value执行BiFunction；
         // 如果key存在，则value执行BiFunction
         myMap.compute(keyB, (k, v) -> (v == null) ? msg : v.concat(msg));
-        myMap.compute(keyF, (k, v) -> (v == null) ? msg : v.concat(msg));
+        myMap.compute(keyF, (k, v) -> (v == null) ? msg : v).concat(msg);
         System.out.println("Map customized BiFunction compute demo content:"+ myMap);
 
 //        myMap.computeIfAbsent(keyC, k -> genValue(k));
-        // 缺少key,对key进行赋值
+        // 缺少key,插入key并赋值
         myMap.computeIfAbsent(keyG, k -> genValue(k));
         // 包含key,对key进行赋值
         myMap.computeIfPresent(keyH, (k,v) -> genValue(v));
