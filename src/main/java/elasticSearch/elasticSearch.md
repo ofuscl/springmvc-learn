@@ -355,7 +355,211 @@
         }
       }
     }
-    
+    GET judge_doc/total_doc/_search
+    {
+      "size": 0,
+      "query": {
+        "nested": {
+          "path": "litigants",
+          "query": {
+            "terms": {
+              "litigants.name.keyword": [
+                "上海浦东发展银行股份有限公司信用卡中心"
+              ]
+            }
+          }
+        }
+      },
+      "aggs": {
+        "claim_count": {
+          "range": {
+            "field": "claim",
+            "ranges": [
+              {
+                "to": 100000,
+                "key": "10万以下"
+              },
+              {
+                "from": 100000,
+                "to": 500000,
+                "key": "10-50万"
+              },
+              {
+                "from": 500000,
+                "to": 1000000,
+                "key": "50-100万"
+              },
+              {
+                "from": 1000000,
+                "to": 10000000,
+                "key": "100-1000万"
+              },
+              {
+                "from": 10000000,
+                "to": 100000000,
+                "key": "1000万以上"
+              },
+              {
+                "from": 100000000,
+                "key": "1亿以上"
+              }
+            ]
+          }
+        },
+        "verdict_claim_count": {
+          "range": {
+            "field": "verdict_claim",
+            "ranges": [
+              {
+                "to": 100000,
+                "key": "10万以下"
+              },
+              {
+                "from": 100000,
+                "to": 500000,
+                "key": "10-50万"
+              },
+              {
+                "from": 500000,
+                "to": 1000000,
+                "key": "50-100万"
+              },
+              {
+                "from": 1000000,
+                "to": 10000000,
+                "key": "100-1000万"
+              },
+              {
+                "from": 10000000,
+                "to": 100000000,
+                "key": "1000万以上"
+              },
+              {
+                "from": 100000000,
+                "key": "1亿以上"
+              }
+            ]
+          }
+        },
+        "court_level_count": {
+          "terms": {
+            "field": "court_level",
+            "size": 10,
+            "exclude": ""
+          }
+        },
+        "reason_count": {
+          "terms": {
+            "field": "reasons.reason.keyword",
+            "size": 10000
+          },
+          "aggs": {
+            "doc_type_count": {
+              "terms": {
+                "field": "content_type",
+                "size": 100
+              }
+            }
+          }
+        },
+        "litigants": {
+          "nested": {
+            "path": "litigants"
+          },
+          "aggs": {
+            "name_count": {
+              "terms": {
+                "field": "litigants.name.keyword",
+                "size": 10,
+                "include": [
+                  "上海翡翠东方传播有限公司"
+                ]
+              },
+              "aggs": {
+                "status_count": {
+                  "terms": {
+                    "field": "litigants.status",
+                    "size": 10
+                  },
+                  "aggs": {
+                    "type": {
+                      "reverse_nested": {},
+                      "aggs": {
+                        "type_count": {
+                          "terms": {
+                            "field": "type",
+                            "size": 1000
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "reverse_nested": {},
+                  "aggs": {
+                    "type_count": {
+                      "terms": {
+                        "field": "type",
+                        "size": 1000
+                      }
+                    }
+                  }
+                },
+                "verdict_date_count": {
+                  "terms": {
+                    "field": "litigants.verdict",
+                    "size": 2,
+                    "include": [
+                      "胜诉",
+                      "败诉"
+                    ]
+                  },
+                  "aggs": {
+                    "trial_date": {
+                      "reverse_nested": {},
+                      "aggs": {
+                        "trial_date_count": {
+                          "date_range": {
+                            "field": "trial_date",
+                            "ranges": [
+                              {
+                                "to": "2016-01-01",
+                  "key": "2015及以前"
+                              },
+                              {
+                                "from": "2016-01-01",
+                                "to": "2017-01-01",
+                  "key": "2016"
+                              },
+                              {
+                                "from": "2017-01-01",
+                                "to": "2018-01-01",
+                  "key": "2017"
+                              },
+                              {
+                                "from": "2018-01-01",
+                                "to": "2019-01-01",
+                  "key": "2018"
+                              },
+                              {
+                                "from": "2019-01-01",
+                                "to": "now",
+                  "key": "2019"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     5、聚合查询 聚合中的missing是缺省的意思
     GET judge_doc/total_doc/_search
     {
@@ -475,6 +679,7 @@
                 }
             }
         }
+        
 六、更新类
     POST my_index/fulltext/1
     {"content":"美国留给伊拉克的是个烂摊子吗"}

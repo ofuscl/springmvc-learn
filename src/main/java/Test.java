@@ -1,6 +1,7 @@
 import learn.schema.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.JsonUtil;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServlet;
@@ -18,25 +19,14 @@ import java.util.regex.Matcher;
 public class Test {
 
     public static void main(String[] args){
+        Map<String,String> xmap = new HashMap<>();
+        xmap.put("a","1");
+        xmap.put("b","2");
+        xmap.put("c","3");
+        Map<String,String> ymap = xmap;
+        ymap.remove("a");
 
-        Map<String, Integer> myMap = new HashMap<>();
-        String keyA = "A";
-        String keyB = "B";
-        String keyC = "C";
-        String keyD = "D";
-        String keyE = "E";
-        String keyF = "F";
-        String keyG = "G";
-        String keyH = "H";
-        myMap.put(keyA, 5);
-//        myMap.put(keyB, "str01B");
-//        myMap.put(keyC, "str01C");
-
-//        myMap.compute(keyA,(k,v) -> (v == null)? 1:(v + 1));
-
-        String transaction = "10000万元";
-        String  t = transaction.replaceAll("[^\\d.]","");
-        System.out.println(Double.parseDouble(t));
-        System.out.println(transaction);
+        System.out.println(JsonUtil.toJsonFromObject(xmap));
+        System.out.println(JsonUtil.toJsonFromObject(ymap));
     }
 }

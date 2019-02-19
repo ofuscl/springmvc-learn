@@ -1,10 +1,10 @@
 package test
 import java.util.List
-import demo.drools.Customer
+import util.drools.Customer
 rule "rule1"
     salience 1
     when
         $customer:Customer(age < 50);
     then
-        System.out.println($customer.getName());
+        $customer.setResult($customer.getName());
     end

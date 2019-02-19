@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-lazy-init="true">
+
+    <description>Shiro Configuration</description>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroRealm"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+        <!-- shiro自带cacheMnager -->
+        <!--<property name="cacheManager" ref="ehCacheManager" />-->
+        <!-- 使用自定义的redis缓存管理器 -->
+         <property name="cacheManager" ref="redisCacheManager" />
+    </bean>
+
+    <!-- 項目自定义的Realm -->
+    <bean id="shiroRealm" class="biz.shiro.ShiroRealm">
+        <!-- 将凭证匹配器设置到realm中，realm按照凭证匹配器的要求进行散列 -->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!-- 凭证匹配器 -->
+    <bean id="credentialsMatcher" class="biz.shiro.RetryLimitCredentialsMatcher">
+        <constructor-arg index="0" ref="redisCacheManager"/>
+        <!-- 指定hash算法为MD5 -->
+        <property name="hashAlgorithmName" value="MD5"/>
+        <!-- 指定散列次数为2次 -->
+        <property name="hashIterations" value="2"/>
+        <!-- 默认为true 指定Hash散列值使用Hex加密存,false时表明hash散列值用用Base64-encoded存储 -->
+        <property name="storedCredentialsHexEncoded" value="true" />
+    </bean>
+
+    <!-- session管理类 -支持分布式session -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- session存储的实现 -->
+        <property name="sessionDAO" ref="shiroRedisSessionDAO"/>
+        <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+        <property name="sessionIdCookie" ref="sessionCookie" />
+        <!-- 设置全局会话超时时间，默认30分钟(1800000) -->
+        <property name="globalSessionTimeout" value="1800000" />
+        <!-- 是否在会话过期后会调用SessionDAO的delete方法删除会话 默认true -->
+        <property name="deleteInvalidSessions" value="true" />
+        <!-- 会话验证器调度时间 -->
+        <property name="sessionValidationInterval" value="1800000" />
+        <!-- 定时检查失效的session -->
+        <property name="sessionValidationSchedulerEnabled" value="true" />
+    </bean>
+
+    <!-- session会话存储的实现类 -->
+    <bean id="shiroRedisSessionDAO" class="biz.shiro.redis.RedisSessionDao">
+        <property name="redisManager" ref="redisManager"/>
+    </bean>
+    <!-- shiro自带的缓存管理器 -->
+    <!--<bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">-->
+    <!--<property name="cacheManagerConfigFile" value="classpath:spring/shiro-ehcache.xml"/>-->
+    <!--</bean>-->
+    <!-- 自定义cacheManager -->
+    <bean id="redisCache" class="biz.shiro.redis.RedisCache">
+        <constructor-arg ref="redisManager"></constructor-arg>
+    </bean>
+    <bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+    </bean>
+    <!-- 自定义redisManager -->
+    <bean id="redisCacheManager" class="biz.shiro.redis.RedisCacheManager">
+        <property name="redisManager" ref="redisManager" />
+    </bean>
+
+    <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+    <bean id="sessionCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- 设置Cookie名字, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
+          当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
+        <constructor-arg name="name" value="SHAREJSESSIONID" />
+        <!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
+        <property name="path" value="/" />
+        <!-- 浏览器中通过document.cookie可以获取cookie属性，设置了HttpOnly=true,在脚本中就不能的到cookie，可以避免cookie被盗用 -->
+        <property name="httpOnly" value="true"/>
+    </bean>
+    <!--<bean id="sessionCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
+        <!--<constructor-arg value="sid"/>-->
+        <!--<property name="httpOnly" value="true"/>-->
+        <!-- -1表示cookie存储于浏览器内存中，关闭浏览器cookie消失 -->
+        <!--<property name="maxAge" value="-1"/>-->
+    <!--</bean>-->
+
+
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <constructor-arg value="rememberMe"/>
+    <property name="httpOnly" value="true"/>
+    <property name="maxAge" value="2592000"/><!-- 30天之后自动消失 -->
+    </bean>
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+    <!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+    <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 没有登录的用户请求需要登录的页面时自动跳转到登录页面 -->
+        <property name="loginUrl" value="/loginIndex"/>
+        <!-- 成功登陆默认跳转页面 不配置则跳转至”/”-->
+        <property name="successUrl" value="/backstage/index"/>
+        <!-- 没有权限默认跳转的页面 -->
+        <property name="unauthorizedUrl" value="/loginIndex"/>
+        <!-- 配置过滤规则，从上到下的顺序匹配 -->
+        <!-- anon:匿名拦截器，即不需要登录即可访问；一般用于静态资源过滤
+             authc:如果没有登录会跳到相应的登录页面登录
+             user:用户拦截器，用户已经身份验证/记住我登录的都可 -->
+        <property name="filterChainDefinitions">
+            <value>
+                /test.html = anon
+                /test/** = anon
+                /static/js/system/login/** = anon
+                /static/js/system/** = authc
+                /static/** = anon
+                /favicon.ico = anon
+                /system_login = anon
+                /report/investigationReport = anon
+                /report/investigationReportHeader = anon
+                /** = authc
+            </value>
+        </property>
+    </bean>
+    <!-- （固定）AOP式方法级权限检查 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+    <!-- （固定）保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>

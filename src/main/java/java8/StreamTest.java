@@ -1,5 +1,6 @@
 package java8;
 
+import base.thread.compareAndSet.Person;
 import org.junit.Test;
 import util.JsonUtil;
 
@@ -42,7 +43,7 @@ public class StreamTest {
 //        testFlapMap(userList);
 //        testStream(userList);
 //        testGroupBy(userList);
-        testSorted(userList);
+        testMap(userList);
 //        testMaxMin(userList);
 //        testSum(userList);
 //        testList(userList);
@@ -134,9 +135,15 @@ public class StreamTest {
      */
     public static void testMap(List<User> userList){
 
-        // Collectors.toMap 引号前定义Key,引号后定义value
-        Map<String,Integer> map = userList.stream().collect(Collectors.toMap(u -> u.getName(), u -> u.getAge()));
+        // Collectors.toMap 引号前定义Key,引号后定义value  TODO 注 当key重复时会抛出异常
+        Map<String,Integer> map = userList.stream().collect(Collectors.toMap(u -> u.getName(), u -> u.getAge(),(oldValue, newValue) -> newValue));
         System.out.println("testMap 111 :" + map.toString());
+
+        Map<String,Integer> map2 = userList.stream().collect(Collectors.toMap(User::getName, User::getAge,(oldValue, newValue) -> newValue));
+        System.out.println("testMap 222 :" + map2.toString());
+
+        Map<String,User> map3 = userList.stream().collect(Collectors.toMap(User::getName, Function.identity(),(oldValue, newValue) -> newValue));
+        System.out.println("testMap 333 :" + map3.toString());
     }
 
     /**

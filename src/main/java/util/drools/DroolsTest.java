@@ -29,12 +29,15 @@ public class DroolsTest {
     }
 
     private void test1(){
+        long s = System.currentTimeMillis();
         KnowledgeBuilder kb = KnowledgeBuilderFactory.newKnowledgeBuilder();
         kb.add(new ClassPathResource("test/test.drl"), ResourceType.DRL);
         Collection collection =kb.getKnowledgePackages();
         KnowledgeBase knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
         knowledgeBase.addKnowledgePackages(collection);
         StatefulKnowledgeSession statefulKnowledgeSession = knowledgeBase.newStatefulKnowledgeSession();
+        long s1 = System.currentTimeMillis();
+        System.out.println(s1-s);
         Customer cus1 = new Customer();
         cus1.setName("张一");
         Customer cus2 = new Customer();
@@ -49,6 +52,9 @@ public class DroolsTest {
         statefulKnowledgeSession.insert(cus4);
         statefulKnowledgeSession.fireAllRules(1);
         statefulKnowledgeSession.dispose();
+        long s2 = System.currentTimeMillis();
+        System.out.println(s2-s1);
+        System.out.println(cus4.getResult());
         System.out.println("end...........................");
     }
 

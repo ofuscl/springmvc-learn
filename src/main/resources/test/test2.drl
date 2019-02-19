@@ -1,8 +1,10 @@
 package test
 import java.util.List
-import demo.drools.Customer
+import util.drools.Customer
 rule "rule1"
-    salience 1
+    no-loop true // 默认 false ，即只要符合条件可以无限次执行
+    lock-on-active true // 避免Fact对象被修改而导致已经执行过的规则被激活执行
+    salience 1 // 设置优先级 数字大的先执行
     when
         $customer:Customer(age < 50);
     then

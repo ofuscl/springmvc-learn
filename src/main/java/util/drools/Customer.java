@@ -9,6 +9,8 @@ public class Customer {
 
     private int age;
 
+    private String result;
+
     public int getAge() {
         return age;
     }
@@ -23,5 +25,13 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

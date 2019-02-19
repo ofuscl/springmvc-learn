@@ -56,9 +56,9 @@ public class ElasticSearchTest {
 
     // 使用QueryBuilder
     public void queryS(){
-    //（1）统计某个字段的数量
+        //（1）统计某个字段的数量
         ValueCountAggregationBuilder vcb=  AggregationBuilders.count("count_uid").field("uid");
-    //（2）去重统计某个字段的数量（有少量误差）
+        //（2）去重统计某个字段的数量（有少量误差）
         CardinalityAggregationBuilder cb= AggregationBuilders.cardinality("distinct_count_uid").field("uid");
         //（3）聚合过滤
         FilterAggregationBuilder fab= AggregationBuilders.filter("uid_filter",QueryBuilders.queryStringQuery("uid:001"));
